@@ -1,6 +1,6 @@
 README.md
 .dockerignore
 Dockerfile
-nginx.conf
 *.log
 .DS_Store
+.git
