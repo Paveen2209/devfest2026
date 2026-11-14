@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northline — Know where your application stands</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;0,9..144,720;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#app">Skip to content</a>
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#/home" class="logo" data-nav="home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-word">Northline</span>
+      </a>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <a href="#/home" data-nav="home">Home</a>
+        <a href="#/roles" data-nav="roles">Open roles</a>
+        <a href="#/process" data-nav="process">How hiring works</a>
+        <a href="#/track" data-nav="track">Track application</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="btn btn-ghost" id="btn-recruiter" title="Simulate recruiter updates">Recruiter demo</button>
+        <a href="#/apply" class="btn btn-solid" data-nav="apply">Apply</a>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app" class="app-shell"></main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <div class="logo footer-logo">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="logo-word">Northline</span>
+        </div>
+        <p>A hiring portal that tells candidates what happened, what comes next, and whether they need to do anything.</p>
+      </div>
+      <div>
+        <h3>Candidates</h3>
+        <a href="#/roles">Browse roles</a>
+        <a href="#/apply">Submit an application</a>
+        <a href="#/track">Track status</a>
+      </div>
+      <div>
+        <h3>Transparency</h3>
+        <a href="#/process">Five-stage process</a>
+        <p class="footer-note">No black holes. Every application gets a receipt, a stage, and a next update window.</p>
+      </div>
+    </div>
+    <p class="footer-copy">Northline careers demo · Frontend-only · Data stays in your browser</p>
+  </footer>
+
+  <div class="modal-backdrop" id="recruiter-modal" role="dialog" aria-modal="true" aria-labelledby="recruiter-title">
+    <div class="modal-box modal-wide">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Demo control</p>
+          <h2 id="recruiter-title">Recruiter simulator</h2>
+          <p class="modal-sub">Change a candidate’s stage and required action. The tracker updates instantly.</p>
+        </div>
+        <button type="button" class="icon-close" data-close="recruiter-modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="current-bar" id="recruiter-active-info"></div>
+        <div class="form-grid">
+          <label>
+            Pipeline stage
+            <select id="sim-stage">
+              <option value="1">1. Application received</option>
+              <option value="2">2. Resume screen</option>
+              <option value="3">3. Hiring team review</option>
+              <option value="4">4. Interviews &amp; assessment</option>
+              <option value="5">5. Decision &amp; offer</option>
+            </select>
+          </label>
+          <label>
+            Candidate next step
+            <select id="sim-action-type">
+              <option value="none">Nothing required — wait for us</option>
+              <option value="schedule_interview">Schedule an interview</option>
+              <option value="submit_assignment">Submit take-home work</option>
+              <option value="upload_docs">Upload a document</option>
+              <option value="review_offer">Review an offer</option>
+            </select>
+          </label>
+        </div>
+        <label>
+          Public note to candidate
+          <input type="text" id="sim-recruiter-note" placeholder="The team loved your case study. Please book a 25-minute screen.">
+        </label>
+        <label>
+          Next expected update
+          <input type="text" id="sim-sla" placeholder="Wednesday by 5:00 PM">
+        </label>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" data-close="recruiter-modal">Cancel</button>
+          <button type="button" class="btn btn-solid" id="btn-apply-recruiter">Apply update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="message-modal" role="dialog" aria-modal="true" aria-labelledby="message-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h2 id="message-title">Message your recruiter</h2>
+          <p class="modal-sub" id="message-subtitle">We’ll add this to your application timeline.</p>
+        </div>
+        <button type="button" class="icon-close" data-close="message-modal" aria-label="Close">&times;</button>
+      </div>
+      <form id="message-form" class="modal-body">
+        <label>
+          Topic
+          <select id="msg-topic">
+            <option value="status">Current stage &amp; timeline</option>
+            <option value="scheduling">Interview availability</option>
+            <option value="materials">Documents or portfolio</option>
+            <option value="other">Something else</option>
+          </select>
+        </label>
+        <label>
+          Message
+          <textarea id="msg-body" rows="4" required placeholder="Hi, I wanted to check whether you need anything else from me this week."></textarea>
+        </label>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" data-close="message-modal">Cancel</button>
+          <button type="submit" class="btn btn-solid">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
